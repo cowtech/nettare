@@ -1,13 +1,13 @@
-# @cowtech/favo
+# @cowtech/nettare
 
-[![Package Version](https://img.shields.io/npm/v/@cowtech/favo.svg)](https://npmjs.com/package/@cowtech/favo)
-[![Dependency Status](https://img.shields.io/gemnasium/github.com/cowtech/favo.svg)](https://gemnasium.com/github.com/cowtech/favo)
+[![Package Version](https://img.shields.io/npm/v/@cowtech/nettare.svg)](https://npmjs.com/package/@cowtech/nettare)
+[![Dependency Status](https://img.shields.io/gemnasium/github.com/cowtech/nettare.svg)](https://gemnasium.com/github.com/cowtech/nettare)
 
 CowTech HTTP utilities.
 
-https://github.com/cowtech/favo
+https://github.com/cowtech/nettare
 
-## Contributing to favo
+## Contributing to nettare
 
 - Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 - Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
