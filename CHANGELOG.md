@@ -1,3 +1,7 @@
+### 2018-11-19 / 0.3.0
+
+* feat: Updated description.
+
 ### 2018-11-19 / 0.2.0
 
 - feat: Initial version.
