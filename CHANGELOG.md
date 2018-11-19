@@ -1,3 +1,7 @@
+### 2018-11-19 / 0.3.1
+
+* chore: Updated README.
+
 ### 2018-11-19 / 0.3.0
 
 * feat: Updated description.
