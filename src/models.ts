@@ -6,7 +6,9 @@ export type BodyParser = (req: IncomingMessage, info?: { limit?: string | number
 export type RawHandler = ((req: IncomingMessage, res: ServerResponse) => any | Promise<any>) & {
   route?: Route
   routes?: Array<Route>
+  corsEnabled?: boolean
 }
+
 export type Handler = (req: Request, res: ServerResponse) => Promise<any>
 
 export interface Request {

@@ -9,6 +9,7 @@ export declare type BodyParser = (req: IncomingMessage, info?: {
 export declare type RawHandler = ((req: IncomingMessage, res: ServerResponse) => any | Promise<any>) & {
     route?: Route;
     routes?: Array<Route>;
+    corsEnabled?: boolean;
 };
 export declare type Handler = (req: Request, res: ServerResponse) => Promise<any>;
 export interface Request {

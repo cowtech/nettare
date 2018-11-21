@@ -13,6 +13,8 @@ export interface CorsOptions {
 }
 
 export function enableCors(handler: RawHandler, options?: CorsOptions): RawHandler {
+  handler.corsEnabled = true
+
   const wrapper = corsFactory(options)
   const wrapped = wrapper(handler)
 

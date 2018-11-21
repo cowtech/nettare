@@ -11,7 +11,7 @@ import Boom, { badData, internal, notFound } from 'boom'
 // @ts-ignore
 import findMyWay from 'find-my-way'
 import { IncomingMessage, ServerResponse } from 'http'
-import { OK } from 'http-status-codes'
+import { NO_CONTENT, OK } from 'http-status-codes'
 import { json as jsonBodyParser, send, text, text as textBodyParser } from 'micro'
 import { ParsedUrlQuery } from 'querystring'
 import { URL, URLSearchParams } from 'url'
@@ -102,15 +102,22 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
     }
   }
 
-  const wrapped = async function(req: IncomingMessage, res: ServerResponse): Promise<any> {
+  const wrapped: RawHandler = async function(req: IncomingMessage, res: ServerResponse): Promise<any> {
     // Prepare response
     const startTime = process.hrtime()
     let code = OK
     let response: any = null
+    ++currentRequest
+
+    if (wrapped.corsEnabled && req.method === 'OPTIONS') {
+      res.setHeader('CowTech-Response-Id', currentRequest)
+      res.setHeader('CowTech-Response-Time', `${durationInMs(startTime).toFixed(6)} ms`)
+      return send(res, NO_CONTENT, '')
+    }
 
     // Wrap the request object. Note that no parsing is done yet
     const request: Request = {
-      id: (++currentRequest).toString(),
+      id: currentRequest.toString(),
       req,
       method: '',
       path: '',
