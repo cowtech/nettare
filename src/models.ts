@@ -3,7 +3,10 @@ import { IncomingHttpHeaders, IncomingMessage, ServerResponse } from 'http'
 import { ParsedUrlQuery } from 'querystring'
 
 export type BodyParser = (req: IncomingMessage, info?: { limit?: string | number; encoding?: string }) => Promise<any>
-export type RawHandler = ((req: IncomingMessage, res: ServerResponse) => any | Promise<any>) & { route?: Route }
+export type RawHandler = ((req: IncomingMessage, res: ServerResponse) => any | Promise<any>) & {
+  route?: Route
+  routes?: Array<Route>
+}
 export type Handler = (req: Request, res: ServerResponse) => Promise<any>
 
 export interface Request {
