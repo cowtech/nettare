@@ -1,3 +1,7 @@
+### 2018-11-21 / 0.4.1
+
+* fix: Fixed CORS preflight.
+
 ### 2018-11-21 / 0.4.0
 
 * feat: Added CORS handling.
