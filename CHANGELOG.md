@@ -1,3 +1,7 @@
+### 2018-11-21 / 0.4.0
+
+* feat: Added CORS handling.
+
 ### 2018-11-19 / 0.3.1
 
 * chore: Updated README.
