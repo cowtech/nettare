@@ -1,3 +1,7 @@
+### 2018-11-23 / 0.6.0
+
+* feat: Fixed components validation.
+
 ### 2018-11-23 / 0.5.0
 
 * feat: Export validation messages.
