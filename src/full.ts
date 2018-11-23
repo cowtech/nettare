@@ -88,16 +88,19 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
         formats: route.config.customFormats
       })
 
+      const components = route.config.components || {}
+
       requestValidator = ajv.compile({
         type: 'object',
-        properties: { query, params, body }
+        properties: { query, params, body },
+        components
       })
 
       if (environment === 'development' && route.schema.response) {
         responseValidator = {}
 
         for (const [code, schema] of Object.entries(route.schema.response))
-          responseValidator[code] = ajv.compile(schema)
+          responseValidator[code] = ajv.compile({ ...schema, components })
       }
     }
   }
