@@ -4,7 +4,7 @@ import {
   durationInMs,
   ExtendedError,
   Route,
-  validationMessagesFormatter
+  validationMessagesFormatters
 } from '@cowtech/favo'
 import Ajv from 'ajv'
 import Boom, { badData, internal, notFound } from 'boom'
@@ -151,13 +151,13 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
         const code = res.statusCode.toString() || '200'
         const validator = responseValidator[code]
 
-        if (!validator) throw internal('', { message: validationMessagesFormatter.invalidResponseCode(code) })
+        if (!validator) throw internal('', { message: validationMessagesFormatters.invalidResponseCode(code) })
 
         const valid = validator(response)
 
         if (!valid) {
           throw internal('', {
-            message: validationMessagesFormatter.invalidResponse(code),
+            message: validationMessagesFormatters.invalidResponse(code),
             errors: convertValidationErrors(response, validator.errors!, '').data.errors
           })
         }
