@@ -1,3 +1,7 @@
+### 2018-11-23 / 0.5.0
+
+* feat: Export validation messages.
+
 ### 2018-11-21 / 0.4.1
 
 * fix: Fixed CORS preflight.
