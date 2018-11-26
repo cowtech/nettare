@@ -1,3 +1,7 @@
+### 2018-11-26 / 0.6.1
+
+* fix: Autocomplete components from models.
+
 ### 2018-11-23 / 0.6.0
 
 * feat: Fixed components validation.
