@@ -90,12 +90,21 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
 
       const components = route.config.components || {}
 
+      // Also add models to components
+      if (route.config.models) {
+        components.schemas = components.schemas || {}
+
+        for (const [name, definition] of Object.entries(route.config.models))
+          components.schemas[`models.${name}`] = definition
+      }
+
       requestValidator = ajv.compile({
         type: 'object',
         properties: { query, params, body },
         components
       })
 
+      // Create response validator in development
       if (environment === 'development' && route.schema.response) {
         responseValidator = {}
 
