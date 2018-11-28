@@ -1,3 +1,7 @@
+### 2018-11-28 / 0.6.2
+
+* fix: Fixed CORS handling.
+
 ### 2018-11-26 / 0.6.1
 
 * fix: Autocomplete components from models.
