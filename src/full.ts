@@ -11,11 +11,11 @@ import Boom, { badData, internal, notFound } from 'boom'
 // @ts-ignore
 import findMyWay from 'find-my-way'
 import { IncomingMessage, ServerResponse } from 'http'
-import { NO_CONTENT, OK } from 'http-status-codes'
+import { OK } from 'http-status-codes'
 import { json as jsonBodyParser, send, text, text as textBodyParser } from 'micro'
 import { ParsedUrlQuery } from 'querystring'
 import { URL, URLSearchParams } from 'url'
-import { BodyParser, environment, Handler, RawHandler, Request, Router } from './models'
+import { BodyParser, environment, globalState, Handler, RawHandler, Request, Router } from './models'
 
 async function urlEncodedBodyParser(req: IncomingMessage): Promise<any> {
   const parsed = new URLSearchParams(await text(req))
@@ -29,8 +29,6 @@ const bodyParsers: { [key: string]: BodyParser } = {
   'application/json': jsonBodyParser,
   'application/x-www-form-urlencoded': urlEncodedBodyParser
 }
-
-let currentRequest = 0
 
 export async function parseRequestPayload(request: Request, router: Router | null): Promise<void> {
   // Parse URL
@@ -119,17 +117,11 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
     const startTime = process.hrtime()
     let code = OK
     let response: any = null
-    ++currentRequest
-
-    if (wrapped.corsEnabled && req.method === 'OPTIONS') {
-      res.setHeader('CowTech-Response-Id', currentRequest)
-      res.setHeader('CowTech-Response-Time', `${durationInMs(startTime).toFixed(6)} ms`)
-      return send(res, NO_CONTENT, '')
-    }
+    globalState.currentRequest++
 
     // Wrap the request object. Note that no parsing is done yet
     const request: Request = {
-      id: currentRequest.toString(),
+      id: globalState.currentRequest.toString(),
       req,
       method: '',
       path: '',
@@ -188,7 +180,7 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
     }
 
     // Set the response time header and send send the response
-    res.setHeader('CowTech-Response-Id', currentRequest)
+    res.setHeader('CowTech-Response-Id', globalState.currentRequest.toString())
     res.setHeader('CowTech-Response-Time', `${durationInMs(startTime).toFixed(6)} ms`)
     await send(res, code, response)
   }

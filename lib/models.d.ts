@@ -2,6 +2,9 @@
 import { HTTPMethod, Route } from '@cowtech/favo';
 import { IncomingHttpHeaders, IncomingMessage, ServerResponse } from 'http';
 import { ParsedUrlQuery } from 'querystring';
+export declare type GlobalState = {
+    [key: string]: any;
+};
 export declare type BodyParser = (req: IncomingMessage, info?: {
     limit?: string | number;
     encoding?: string;
@@ -33,3 +36,6 @@ export interface Router {
     on(method: HTTPMethod | Array<HTTPMethod>, path: string, handler: unknown): void;
 }
 export declare const environment: string;
+export declare const globalState: {
+    currentRequest: number;
+};

@@ -2,6 +2,8 @@ import { HTTPMethod, Route } from '@cowtech/favo'
 import { IncomingHttpHeaders, IncomingMessage, ServerResponse } from 'http'
 import { ParsedUrlQuery } from 'querystring'
 
+export type GlobalState = { [key: string]: any }
+
 export type BodyParser = (req: IncomingMessage, info?: { limit?: string | number; encoding?: string }) => Promise<any>
 export type RawHandler = ((req: IncomingMessage, res: ServerResponse) => any | Promise<any>) & {
   route?: Route
@@ -28,3 +30,7 @@ export interface Router {
 }
 
 export const environment: string = process.env.NODE_ENV || 'development'
+
+export const globalState = {
+  currentRequest: 0
+}
