@@ -13,16 +13,13 @@ import findMyWay from 'find-my-way'
 import { IncomingMessage, ServerResponse } from 'http'
 import { OK } from 'http-status-codes'
 import { json as jsonBodyParser, send, text, text as textBodyParser } from 'micro'
+import { parse as parseUrlEncoded } from 'qs'
 import { ParsedUrlQuery } from 'querystring'
-import { URL, URLSearchParams } from 'url'
+import { URL } from 'url'
 import { BodyParser, environment, globalState, Handler, RawHandler, Request, Router } from './models'
 
-async function urlEncodedBodyParser(req: IncomingMessage): Promise<any> {
-  const parsed = new URLSearchParams(await text(req))
-  const params: ParsedUrlQuery = {}
-
-  for (const [k, v] of parsed.entries()) params[k] = v
-  return params
+async function urlEncodedBodyParser(req: IncomingMessage): Promise<ParsedUrlQuery> {
+  return parseUrlEncoded(await text(req))
 }
 
 const bodyParsers: { [key: string]: BodyParser } = {
