@@ -1,3 +1,7 @@
+### 2018-12-17 / 0.7.0
+
+* feat: Improve form encoded payload using qs.
+
 ### 2018-11-28 / 0.6.2
 
 * fix: Fixed CORS handling.
