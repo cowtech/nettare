@@ -51,7 +51,7 @@ export async function parseRequestPayload(request: Request, router: Router | nul
 
   // Set body, if needed
   if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
-    const contentType = (headers['content-type'] || '').toLowerCase()
+    const contentType = (headers['content-type'] || '').toLowerCase().replace(/\s*;.+$/, '')
 
     request.body = await (bodyParsers[contentType] || textBodyParser)(request.req)
   }
