@@ -1,3 +1,7 @@
+### 2019-01-01 / 0.7.1
+
+* fix: Ignore encoding in Content-Type.
+
 ### 2018-12-17 / 0.7.0
 
 * feat: Improve form encoded payload using qs.
