@@ -1,3 +1,7 @@
+### 2019-01-14 / 0.7.2
+
+* fix: Improved types definition.
+
 ### 2019-01-01 / 0.7.1
 
 * fix: Ignore encoding in Content-Type.
