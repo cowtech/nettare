@@ -66,7 +66,7 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
     // Create the router
     if (route.method && (route.path || route.url)) {
       router = findMyWay()
-      router!.on(route.method, route.path || route.url, () => false)
+      router.on(route.method, route.path || route.url, () => false)
     }
 
     // Create the request validator

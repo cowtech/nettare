@@ -1,4 +1,5 @@
 import { HTTPMethod, Route } from '@cowtech/favo'
+import { FindResult, HTTPVersion } from 'find-my-way'
 import { IncomingHttpHeaders, IncomingMessage, ServerResponse } from 'http'
 import { ParsedUrlQuery } from 'querystring'
 
@@ -17,7 +18,7 @@ export interface Request {
   method: string
   path: string
   headers: IncomingHttpHeaders
-  params: { [key: string]: string }
+  params: { [key: string]: string | undefined }
   query: ParsedUrlQuery
   body: any
   id: string
@@ -25,12 +26,12 @@ export interface Request {
 }
 
 export interface Router {
-  find(method: string, path: string): { params: { [key: string]: string } }
+  find(method: string, path: string): FindResult<HTTPVersion.V1> | null
   on(method: HTTPMethod | Array<HTTPMethod>, path: string, handler: unknown): void
 }
 
-export const environment: string = process.env.NODE_ENV || 'development'
+export const environment: string = process.env.NODE_ENV! || 'development'
 
-export const globalState = {
+export const globalState: GlobalState = {
   currentRequest: 0
 }

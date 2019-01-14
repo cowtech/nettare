@@ -1,5 +1,6 @@
 /// <reference types="node" />
 import { HTTPMethod, Route } from '@cowtech/favo';
+import { FindResult, HTTPVersion } from 'find-my-way';
 import { IncomingHttpHeaders, IncomingMessage, ServerResponse } from 'http';
 import { ParsedUrlQuery } from 'querystring';
 export declare type GlobalState = {
@@ -20,7 +21,7 @@ export interface Request {
     path: string;
     headers: IncomingHttpHeaders;
     params: {
-        [key: string]: string;
+        [key: string]: string | undefined;
     };
     query: ParsedUrlQuery;
     body: any;
@@ -28,14 +29,8 @@ export interface Request {
     req: IncomingMessage;
 }
 export interface Router {
-    find(method: string, path: string): {
-        params: {
-            [key: string]: string;
-        };
-    };
+    find(method: string, path: string): FindResult<HTTPVersion.V1> | null;
     on(method: HTTPMethod | Array<HTTPMethod>, path: string, handler: unknown): void;
 }
 export declare const environment: string;
-export declare const globalState: {
-    currentRequest: number;
-};
+export declare const globalState: GlobalState;
