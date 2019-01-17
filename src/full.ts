@@ -22,7 +22,7 @@ async function urlEncodedBodyParser(req: IncomingMessage): Promise<ParsedUrlQuer
   return parseUrlEncoded(await text(req))
 }
 
-const bodyParsers: { [key: string]: BodyParser } = {
+export const bodyParsers: { [key: string]: BodyParser } = {
   'application/json': jsonBodyParser,
   'application/x-www-form-urlencoded': urlEncodedBodyParser
 }
