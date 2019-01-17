@@ -8,7 +8,6 @@ import {
 } from '@cowtech/favo'
 import Ajv from 'ajv'
 import Boom, { badData, internal, notFound } from 'boom'
-// @ts-ignore
 import findMyWay from 'find-my-way'
 import { IncomingMessage, ServerResponse } from 'http'
 import { OK } from 'http-status-codes'
