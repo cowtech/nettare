@@ -19,7 +19,9 @@ export function enableCors(handler: RawHandler, options?: CorsOptions): RawHandl
   const wrapper = corsFactory(options)
 
   const wrapped: RawHandler = wrapper(function(req: IncomingMessage, res: ServerResponse): any | Promise<any> {
-    if (req.method !== 'OPTIONS') return handler(req, res)
+    if (req.method !== 'OPTIONS') {
+      return handler(req, res)
+    }
 
     res.setHeader('CowTech-Response-Id', globalState.currentRequest.toString())
     res.setHeader('CowTech-Response-Time', `${durationInMs(process.hrtime()).toFixed(6)} ms`)

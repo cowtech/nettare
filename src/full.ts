@@ -34,7 +34,9 @@ export async function parseRequestPayload(request: Request, router: Router | nul
   // Match method and path and set params
   if (router) {
     const match = router.find(method!, url.pathname)
-    if (!match) throw notFound('Not found.')
+    if (!match) {
+      throw notFound('Not found.')
+    }
 
     request.params = match.params
   }
@@ -46,7 +48,9 @@ export async function parseRequestPayload(request: Request, router: Router | nul
   request.query = {}
 
   // Parse querystring
-  for (const [k, v] of url.searchParams.entries()) request.query[k] = v
+  for (const [k, v] of url.searchParams.entries()) {
+    request.query[k] = v
+  }
 
   // Set body, if needed
   if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
@@ -88,8 +92,9 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
       if (route.config.models) {
         components.schemas = components.schemas || {}
 
-        for (const [name, definition] of Object.entries(route.config.models))
+        for (const [name, definition] of Object.entries(route.config.models)) {
           components.schemas[`models.${name}`] = definition
+        }
       }
 
       requestValidator = ajv.compile({
@@ -102,8 +107,9 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
       if (environment === 'development' && route.schema.response) {
         responseValidator = {}
 
-        for (const [code, schema] of Object.entries(route.schema.response))
+        for (const [code, schema] of Object.entries(route.schema.response)) {
           responseValidator[code] = ajv.compile({ ...schema, components })
+        }
       }
     }
   }
@@ -151,7 +157,9 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
         const code = res.statusCode.toString() || '200'
         const validator = responseValidator[code]
 
-        if (!validator) throw internal('', { message: validationMessagesFormatters.invalidResponseCode(code) })
+        if (!validator) {
+          throw internal('', { message: validationMessagesFormatters.invalidResponseCode(code) })
+        }
 
         const valid = validator(response)
 
@@ -169,7 +177,9 @@ export function handleFullRequest(handler: Handler, route?: Route): RawHandler {
         : convertError({ body: request.body, query: request.query, params: request.params }, e as ExtendedError)
 
       // Add all headers, including response time, then send the error
-      for (const [k, v] of Object.entries(boom.output.headers)) res.setHeader(k, v)
+      for (const [k, v] of Object.entries(boom.output.headers)) {
+        res.setHeader(k, v)
+      }
 
       code = boom.output.statusCode
       response = { ...boom.output.payload, ...boom.data }
