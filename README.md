@@ -1,11 +1,8 @@
 # @cowtech/nettare
 
-[![Package Version](https://img.shields.io/npm/v/@cowtech/nettare.svg)](https://npmjs.com/package/@cowtech/nettare)
-[![Dependency Status](https://img.shields.io/gemnasium/github.com/cowtech/nettare.svg)](https://gemnasium.com/github.com/cowtech/nettare)
+## END OF DEVELOPMENT NOTICE - This package has been discontinued
 
 CowTech HTTP utilities.
-
-https://github.com/cowtech/nettare
 
 ## Contributing to nettare
 
